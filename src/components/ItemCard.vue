@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div><img class="card__cover"  :src="require(`../images/${cover}`)" alt="Pizza image"></div>
-    <span class="card__name">{{ name }}</span>
+    <span class="card__name">{{name}}</span>
     <span class="card__price">Price:
       <span>{{price}} ₽</span>
     </span>

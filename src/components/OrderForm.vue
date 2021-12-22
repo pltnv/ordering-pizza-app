@@ -7,7 +7,7 @@
     </div>
     <hr>
     <div class="form__address">
-      <span>  Address </span>
+      <span> Address </span>
       <div class="inp">
         <input class="form__address-input" type="text"  placeholder="Street">
         <input class="form__address-input" type="text"  placeholder="House">
