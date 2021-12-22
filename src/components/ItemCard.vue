@@ -1,57 +1,86 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-router" target="_blank" rel="noopener">router</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="card">
+    <div><img class="card__cover"  :src="require(`../images/${cover}`)" alt="Pizza image"></div>
+    <span class="card__name">{{ name }}</span>
+    <span class="card__price">Price:
+      <span>{{price}} ₽</span>
+    </span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: "ItemCard.vue",
   props: {
-    msg: String
+    name: String,
+    price: Number,
+    cover: String,
   }
 }
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.card{
+  background-color: #fdddb8;
+  height: 90%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 1rem;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.card__cover{
+  height:100%;
+  width: 100%;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.card__name{
+  text-align: start;
+  font-size: 2rem;
+  color: rgb(187, 149, 108);
+  font-weight: bold;
+  max-width:100%;
+  white-space: nowrap;
 }
-a {
-  color: #42b983;
+
+.card__price{
+  font-weight: bold;
+  text-align: justify;
+  font-size: 1.4rem;
+  color: #7c7676;
+  width: 90%;
 }
+
+@media screen and (max-width : 728px) {
+  .card{
+    font-size: 1rem;
+    padding: 0.5rem;
+    white-space: nowrap;
+  }
+
+  .card__price{
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .card__name{
+    font-size: 1.2rem;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width : 728px) {
+  .card__price{
+    font-size: 0.7rem;
+    max-width: 100%;
+  }
+
+  .card__name{
+    font-size: 1rem;
+    max-width: 100%;
+  }
+}
+
 </style>
