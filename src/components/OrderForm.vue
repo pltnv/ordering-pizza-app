@@ -96,10 +96,11 @@ hr {
   border: 0;
   border-radius: 0.3rem;
   font-size: 1rem;
-  padding: 0.6rem;
+  padding: 0.5rem;
   width: 20%;
   height: 30%;
   cursor: pointer;
+
 }
 
 .form__button-back{
@@ -143,8 +144,15 @@ hr {
   }
 
   .form__button {
-    width: 30%;
+    width: 35%;
   }
+}
+
+@media screen and (max-width : 254px) {
+  .form__button {
+    width: 40%;
+  }
+
 }
 
 </style>
