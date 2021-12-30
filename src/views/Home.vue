@@ -3,7 +3,7 @@
     <ul class="items-list">
       <li v-for="(item, id) in items" :key="id" class="items-list__item">
         <a @click="openOrderForm(item)">
-          <ItemCard
+          <ItemCard class="item-list__card"
               :name="item.name"
               :price="item.price"
               :cover="item.url"
@@ -58,6 +58,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .order-modal{
   position: fixed;
   top: 50%;
@@ -66,6 +68,7 @@ export default {
   width: 55%;
   height: auto;
   transform: translate(-50%, -50%);
+  /*overflow: hidden;*/
 }
 
 .items-list{
@@ -84,11 +87,17 @@ export default {
   width: 22%;
 }
 
+.item-list__card:hover{
+  cursor: pointer;
+}
+
 @media (max-width: 1133px) {
-  .order-modal{
+  .order-modal {
     width: 80%;
+
   }
-  .items-list{
+
+  .items-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -98,11 +107,13 @@ export default {
     width: 100%;
   }
 
-  .items-list__item{
+  .items-list__item {
     margin: 0.4rem;
-    list-style-type:none;
+    list-style-type: none;
     width: 45%;
   }
+
+}
 
   @media (max-width: 304px) {
     .order-modal{
@@ -118,5 +129,38 @@ export default {
       width: 100%;
     }
   }
+
+
+
+@media screen and (orientation:landscape) {
+
+  .order-modal{
+    position: fixed;
+    top:50%;
+    left: 50%;
+
+    opacity: 0.80;
+    width: 75%;
+    /*height: auto;*/
+    transform: translate(-50%, -50%);
+    /*overflow: hidden;*/
+  }
 }
+
+@media screen and (max-width: 570px) and (orientation: landscape) {
+  .order-modal{
+    position: fixed;
+    top:49%;
+    left: 50%;
+    margin: 0.5rem;
+    opacity: 0.80;
+    width: 75%;
+    /*height: auto;*/
+    transform: translate(-50%, -50%);
+    /*overflow: hidden;*/
+  }
+
+}
+
+
 </style>

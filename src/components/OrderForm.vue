@@ -1,7 +1,7 @@
 <template>
   <div class="form">
-    <h1> Make an order</h1>
-    <div class="form__price">
+    <span class="form__title"> Make an order</span>
+    <div class="form__position">
       <span>{{currentOrder.name}}  </span>
       <span>{{currentOrder.price}}</span>
     </div>
@@ -51,10 +51,17 @@ export default {
 
 }
 
-.form__price{
+.form__title{
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 0.3rem;
+
+
+}
+.form__position{
   display: flex;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 hr {
@@ -155,4 +162,40 @@ hr {
 
 }
 
+/*Стилизация горизонтального отображения*/
+
+@media screen and (orientation: landscape) {
+  .form{
+    padding: 0.5rem;
+    margin: 0.1rem;
+  }
+
+  .form__position{
+    font-size: 1rem;
+  }
+
+  .form__address{
+    font-size: 1rem;
+  }
+
+  .form__address-input{
+    height: 1.5rem;
+    border-radius: 0.8rem;
+    margin-bottom: 0.3rem;
+    border: 1px solid #afa4a4;
+    padding: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 570px) and (orientation: landscape){
+  .form{
+    padding: 0.5rem;
+    margin: 0.5rem;
+  }
+
+  .form__title{
+    font-size: 1rem;
+    margin-top: 0.1rem;
+  }
+}
 </style>
