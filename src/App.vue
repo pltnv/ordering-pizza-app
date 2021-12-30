@@ -2,7 +2,7 @@
   <div class="nav">
     <router-link to="/">
       <div class="logo">
-        <img class="logo__icon" src="../src/images/logo.png">
+        <img class="logo__icon" src="../src/images/logo.png" alt="Company icon">
         <span class="logo__name">Pizza</span>
       </div>
     </router-link>
