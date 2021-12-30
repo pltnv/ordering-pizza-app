@@ -41,8 +41,7 @@ export default {
 .form{
   background-color: #e7e2d2;
   height: 100%;
-  width: 60%;
-  max-width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   padding: 1rem;

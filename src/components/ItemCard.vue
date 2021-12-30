@@ -83,4 +83,26 @@ export default {
   }
 }
 
+/*Стилизация горизонтального отображения*/
+
+@media screen and (max-width: 840px) and (orientation: landscape) {
+  .card__name{
+    font-size: 1.4rem;
+  }
+
+  .card__price{
+    font-size: 1rem;
+  }
+}
+
+
+@media screen and (max-width: 753px) and (orientation: landscape) {
+  .card__name{
+    font-size: 1.2rem;
+  }
+
+  .card__price{
+    font-size: 1rem;
+  }
+}
 </style>

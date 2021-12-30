@@ -58,17 +58,13 @@ export default {
 </script>
 
 <style scoped>
-
-
 .order-modal{
   position: fixed;
   top: 50%;
   left: 50%;
-  opacity: 0.80;
-  width: 55%;
+  width: 50%;
   height: auto;
   transform: translate(-50%, -50%);
-  /*overflow: hidden;*/
 }
 
 .items-list{
@@ -94,7 +90,6 @@ export default {
 @media (max-width: 1133px) {
   .order-modal {
     width: 80%;
-
   }
 
   .items-list {
@@ -112,7 +107,6 @@ export default {
     list-style-type: none;
     width: 45%;
   }
-
 }
 
   @media (max-width: 304px) {
@@ -130,37 +124,35 @@ export default {
     }
   }
 
-
+/*Стилизация горизонтального отображения*/
 
 @media screen and (orientation:landscape) {
-
   .order-modal{
-    position: fixed;
-    top:50%;
-    left: 50%;
-
-    opacity: 0.80;
     width: 75%;
-    /*height: auto;*/
-    transform: translate(-50%, -50%);
-    /*overflow: hidden;*/
   }
 }
 
 @media screen and (max-width: 570px) and (orientation: landscape) {
   .order-modal{
-    position: fixed;
     top:49%;
-    left: 50%;
     margin: 0.5rem;
-    opacity: 0.80;
     width: 75%;
-    /*height: auto;*/
-    transform: translate(-50%, -50%);
-    /*overflow: hidden;*/
   }
-
 }
 
+@media screen and (max-width: 840px) and (orientation: landscape) {
+  .items-list__item{
+    margin: 1rem;
+    list-style-type:none;
+    width: 29%;
+  }
+}
+
+@media screen and (max-width: 753px) and (orientation: landscape) {
+  .items-list__item{
+    margin: 0.8rem;
+    width: 28%;
+  }
+}
 
 </style>
