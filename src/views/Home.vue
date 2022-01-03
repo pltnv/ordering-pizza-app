@@ -54,10 +54,20 @@ export default {
       this.currentOrder = item;
     },
   },
+  // watch: {
+  //   isOrderFormVisible(Value) {
+  //     if (Value = 'true') {
+  //       document.documentElement.style.overflow = "hidden"
+  //     }
+  //     else if (Value = 'false') { document.documentElement.style.overflow = "scroll"}
+  //   }
+  // }
 }
 </script>
 
 <style scoped>
+
+
 .order-modal{
   position: fixed;
   top: 50%;
@@ -65,16 +75,18 @@ export default {
   width: 50%;
   height: auto;
   transform: translate(-50%, -50%);
+  z-index: 100;
 }
 
 .items-list{
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-content: center;
   align-items: center;
   padding: 0.1rem;
   height: 100%;
+  text-align:center
 }
 
 .items-list__item{
@@ -95,10 +107,9 @@ export default {
   .items-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
     align-items: center;
     align-content: center;
-    padding: 1px;
+    padding: 1rem;
     width: 100%;
   }
 
@@ -123,6 +134,7 @@ export default {
       width: 100%;
     }
   }
+
 
 /*Стилизация горизонтального отображения*/
 
