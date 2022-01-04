@@ -18,7 +18,6 @@
       <button class="form__button form__button-back" @click="closeOrderForm"> Назад </button>
       <button class="form__button form__button-order"> Заказать </button>
     </div>
-
   </div>
 </template>
 
@@ -27,7 +26,6 @@ export default {
   name: "OrderForm.vue",
   props: {
     currentOrder: Object
-
   },
   methods: {
     closeOrderForm() {
@@ -47,16 +45,14 @@ export default {
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 0 2px rgba(0,0,0,0.5);
-
 }
 
 .form__title{
   font-size: 2rem;
   font-weight: bold;
   padding: 0.3rem;
-
-
 }
+
 .form__position{
   display: flex;
   justify-content: space-between;
@@ -106,14 +102,12 @@ hr {
   width: 20%;
   height: 30%;
   cursor: pointer;
-
 }
 
 .form__button-back{
   background-color: #f12f63;
   color: azure;
   margin-top: auto;
-
 }
 
 .form__button-order{
@@ -127,7 +121,6 @@ hr {
     height: 80%;
     width: 80%;
     margin: 0.5rem;
-
   }
   .form__address{
     font-weight: bold;
@@ -158,7 +151,6 @@ hr {
   .form__button {
     width: 40%;
   }
-
 }
 
 /*Стилизация горизонтального отображения*/

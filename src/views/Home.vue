@@ -10,15 +10,16 @@
           >
           </ItemCard>
         </a>
-        <OrderForm
+          <OrderForm
             v-if="isOrderFormVisible"
             @close="isOrderFormVisible = false"
             class="order-modal"
             :currentOrder="currentOrder"
-        ></OrderForm>
+          ></OrderForm>
       </li>
     </ul>
   </div>
+  <div class="modal-overlay" v-if="isOrderFormVisible" @click="isOrderFormVisible = false"></div>
 </template>
 
 <script>
@@ -54,19 +55,16 @@ export default {
       this.currentOrder = item;
     },
   },
-  // watch: {
-  //   isOrderFormVisible(Value) {
-  //     if (Value = 'true') {
-  //       document.documentElement.style.overflow = "hidden"
-  //     }
-  //     else if (Value = 'false') { document.documentElement.style.overflow = "scroll"}
-  //   }
-  // }
+  watch: {
+    isOrderFormVisible (visibleStatus) {
+      if (visibleStatus) document.documentElement.style.overflow = "hidden"
+      else document.documentElement.style.overflow = "auto"
+    }
+  }
 }
 </script>
 
 <style scoped>
-
 
 .order-modal{
   position: fixed;
@@ -75,7 +73,7 @@ export default {
   width: 50%;
   height: auto;
   transform: translate(-50%, -50%);
-  z-index: 100;
+  z-index: 3;
 }
 
 .items-list{
@@ -84,9 +82,10 @@ export default {
   justify-content: space-between;
   align-content: center;
   align-items: center;
-  padding: 0.1rem;
+  padding: 0.4rem;
   height: 100%;
-  text-align:center
+  text-align:center;
+  z-index: 2;
 }
 
 .items-list__item{
@@ -97,6 +96,16 @@ export default {
 
 .item-list__card:hover{
   cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 1133px) {
