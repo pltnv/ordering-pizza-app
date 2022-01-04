@@ -18,6 +18,7 @@
       <button class="form__button form__button-back" @click="closeOrderForm"> Назад </button>
       <button class="form__button form__button-order"> Заказать </button>
     </div>
+
   </div>
 </template>
 

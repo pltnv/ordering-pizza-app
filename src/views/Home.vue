@@ -69,8 +69,8 @@ export default {
 .order-modal{
   position: fixed;
   top: 50%;
-  left: 50%;
-  width: 50%;
+  left: 48%;
+  width: 80%;
   height: auto;
   transform: translate(-50%, -50%);
   z-index: 3;
@@ -86,6 +86,8 @@ export default {
   height: 100%;
   text-align:center;
   z-index: 2;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .items-list__item{
@@ -118,7 +120,6 @@ export default {
     flex-wrap: wrap;
     align-items: center;
     align-content: center;
-    padding: 1rem;
     width: 100%;
   }
 
@@ -155,9 +156,9 @@ export default {
 
 @media screen and (max-width: 570px) and (orientation: landscape) {
   .order-modal{
-    top:49%;
+    top:50%;
     margin: 0.5rem;
-    width: 75%;
+    width: 80%;
   }
 }
 
