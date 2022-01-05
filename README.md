@@ -1,4 +1,6 @@
-# order-pizza-app
+# 🍕 Vue 3 app for ordering pizza 
+
+The app contains a pop-up component and uses Vuex & VueRoute
 
 ## Project setup
 ```
