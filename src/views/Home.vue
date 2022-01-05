@@ -19,7 +19,7 @@
       </li>
     </ul>
   </div>
-  <div class="modal-overlay" v-if="isOrderFormVisible" @click="closeOrderForm"></div>
+  <div class="modal-overlay" v-if="isOrderFormVisible" @click="closeOrderForm"></div> 
 </template>
 
 <script>
@@ -60,7 +60,6 @@ export default {
     if (this.$route.query.id && this.$store.state.items[this.$route.query.id-1]) {
       this.currentOrder = this.$store.state.items[this.$route.query.id-1]
       this.isOrderFormVisible = true;
-      console.log(this.$route.query.id)
     } else {
       this.$router.push('/');
     }
