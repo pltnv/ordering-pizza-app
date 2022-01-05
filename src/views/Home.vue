@@ -19,7 +19,7 @@
       </li>
     </ul>
   </div>
-  <div class="modal-overlay" v-if="isOrderFormVisible" @click="closeOrderForm"></div> 
+  <div class="modal-overlay" v-if="isOrderFormVisible" @click="closeOrderForm"></div>
 </template>
 
 <script>
@@ -43,7 +43,6 @@ export default {
       this.$router.push({query: {id: item.id}})
       this.isOrderFormVisible = true;
       this.currentOrder = item;
-
     },
     closeOrderForm() {
       this.isOrderFormVisible = false;
@@ -52,8 +51,12 @@ export default {
   },
   watch: {
     isOrderFormVisible (visibleStatus) {
-      if (visibleStatus) document.documentElement.style.overflow = "hidden"
-      else document.documentElement.style.overflow = "auto"
+      if (visibleStatus) {
+        document.documentElement.style.overflow = "hidden"
+      }
+      else {
+        document.documentElement.style.overflow = "auto"
+      }
     },
   },
   mounted() {
