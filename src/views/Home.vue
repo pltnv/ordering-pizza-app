@@ -70,16 +70,6 @@ export default {
 
 <style scoped>
 
-.order-modal{
-  position: fixed;
-  top: 50%;
-  left: 48%;
-  width: 80%;
-  height: auto;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-}
-
 .items-list{
   display: flex;
   flex-wrap: wrap;
@@ -102,6 +92,16 @@ export default {
 
 .item-list__card:hover{
   cursor: pointer;
+}
+
+.order-modal{
+  position: fixed;
+  top: 50%;
+  left: 48%;
+  width: 80%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 3;
 }
 
 .modal-overlay {
