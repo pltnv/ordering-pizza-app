@@ -1,7 +1,7 @@
 <template >
   <div class="container">
     <ul class="items-list">
-      <li v-for="(item, id) in items" :key="id" class="items-list__item">
+      <li v-for="(item, id) in this.$store.state.items" :key="id" class="items-list__item">
         <a @click="openOrderForm(item)">
           <ItemCard class="item-list__card"
               :name="item.name"
@@ -19,7 +19,7 @@
       </li>
     </ul>
   </div>
-  <div class="modal-overlay" v-if="isOrderFormVisible" @click="isOrderFormVisible = false"></div>
+  <div class="modal-overlay" v-if="isOrderFormVisible" @click="closeOrderForm"></div>
 </template>
 
 <script>
@@ -34,33 +34,37 @@ export default {
 
   data() {
     return {
-      items: [
-        {name: 'Margherita', price: 400, url: '1.png'},
-        {name: 'Pepperoni', price: 450, url: '7.png'},
-        {name: 'Quattro Forma', price: 490, url: '8.png'},
-        {name: 'Frutti di Mare', price: 590, url: '4.png'},
-        {name: 'Pineapple', price: 600, url: '6.png'},
-        {name: 'Mushroom', price: 650, url: '5.png'},
-        {name: 'Pear', price: 520, url: '2.png'},
-        {name: 'Carbonara', price: 300, url: '3.jpg'},
-        {name: 'Flexo Testironi', price: 900, url: '1.png'},
-      ],
       isOrderFormVisible: false,
       currentOrder: '',
     }
   },
   methods: {
     openOrderForm(item) {
+      this.$router.push({query: {id: item.id}})
       this.isOrderFormVisible = true;
       this.currentOrder = item;
+
+    },
+    closeOrderForm() {
+      this.isOrderFormVisible = false;
+      this.$router.push('/');
     },
   },
   watch: {
     isOrderFormVisible (visibleStatus) {
       if (visibleStatus) document.documentElement.style.overflow = "hidden"
       else document.documentElement.style.overflow = "auto"
+    },
+  },
+  mounted() {
+    if (this.$route.query.id && this.$store.state.items[this.$route.query.id-1]) {
+      this.currentOrder = this.$store.state.items[this.$route.query.id-1]
+      this.isOrderFormVisible = true;
+      console.log(this.$route.query.id)
+    } else {
+      this.$router.push('/');
     }
-  }
+  },
 }
 </script>
 
