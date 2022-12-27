@@ -25,48 +25,90 @@
 <script>
 import ItemCard from "@/components/ItemCard";
 import OrderForm from "@/components/OrderForm";
+import { ref, watch, onMounted } from 'vue'
 
 export default {
   name: 'Home',
   components: {
     ItemCard, OrderForm
   },
+  setup(props, ctx) {
+    let isOrderFormVisible = ref(false)
+    let currentOrder = ref('')
 
-  data() {
-    return {
-      isOrderFormVisible: false,
-      currentOrder: '',
-    }
-  },
-  methods: {
-    openOrderForm(item) {
+    const openOrderForm = (item) => {
       this.$router.push({query: {id: item.id}})
-      this.isOrderFormVisible = true;
-      this.currentOrder = item;
-    },
-    closeOrderForm() {
+      isOrderFormVisible.value = true;
+      currentOrder.value = item;
+    }
+
+    const closeOrderForm = () => {
       this.isOrderFormVisible = false;
       this.$router.push('/');
-    },
-  },
-  watch: {
-    isOrderFormVisible (visibleStatus) {
+    }
+
+    onMounted(() => {
+      if (this.$route.query.id && this.$store.state.items[this.$route.query.id-1]) {
+        currentOrder.value = this.$store.state.items[this.$route.query.id-1]
+        isOrderFormVisible.value = true;
+      } else {
+        this.$router.push('/');
+      }
+    })
+
+    watch(isOrderFormVisible, (visibleStatus) => {
       if (visibleStatus) {
         document.documentElement.style.overflow = "hidden"
       }
       else {
         document.documentElement.style.overflow = "auto"
       }
-    },
+    });
+
+    return {
+      isOrderFormVisible,
+      currentOrder,
+
+      openOrderForm,
+      closeOrderForm
+    };
   },
-  mounted() {
-    if (this.$route.query.id && this.$store.state.items[this.$route.query.id-1]) {
-      this.currentOrder = this.$store.state.items[this.$route.query.id-1]
-      this.isOrderFormVisible = true;
-    } else {
-      this.$router.push('/');
-    }
-  },
+
+  // data() {
+  //   return {
+  //     isOrderFormVisible: false,
+  //     currentOrder: '',
+  //   }
+  // },
+  // methods: {
+  //   openOrderForm(item) {
+  //     this.$router.push({query: {id: item.id}})
+  //     this.isOrderFormVisible = true;
+  //     this.currentOrder = item;
+  //   },
+  //   closeOrderForm() {
+  //     this.isOrderFormVisible = false;
+  //     this.$router.push('/');
+  //   },
+  // },
+  // watch: {
+  //   isOrderFormVisible (visibleStatus) {
+  //     if (visibleStatus) {
+  //       document.documentElement.style.overflow = "hidden"
+  //     }
+  //     else {
+  //       document.documentElement.style.overflow = "auto"
+  //     }
+  //   },
+  // },
+  // mounted() {
+  //   if (this.$route.query.id && this.$store.state.items[this.$route.query.id-1]) {
+  //     this.currentOrder = this.$store.state.items[this.$route.query.id-1]
+  //     this.isOrderFormVisible = true;
+  //   } else {
+  //     this.$router.push('/');
+  //   }
+  // },
 }
 </script>
 

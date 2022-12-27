@@ -23,16 +23,21 @@
 </template>
 
 <script>
+
 export default {
   name: "OrderForm.vue",
   props: {
     currentOrder: Object
   },
-  methods: {
-    closeOrderForm() {
+  setup() {
+    const closeOrderForm = () => {
       this.$emit('close')
     }
-  }
+
+    return {
+      closeOrderForm
+    };
+  },
 }
 </script>
 
