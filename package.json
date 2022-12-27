@@ -7,9 +7,9 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "pinia": "^2.0.28",
     "vue": "^3.0.0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.0-0"
   },
   "devDependencies": {
     "@vue/cli-plugin-router": "~4.5.0",

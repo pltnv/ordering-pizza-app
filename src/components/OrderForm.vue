@@ -2,8 +2,8 @@
   <div class="form">
     <span class="form__title"> Make an order</span>
     <div class="form__position">
-      <span>{{currentOrder.name}}  </span>
-      <span>{{currentOrder.price}}</span>
+      <span>{{ currentOrder.name }}  </span>
+      <span>{{ currentOrder.price }}</span>
     </div>
     <hr>
     <div class="form__address">
@@ -23,17 +23,15 @@
 </template>
 
 <script>
-
 export default {
   name: "OrderForm.vue",
   props: {
     currentOrder: Object
   },
-  setup() {
+  setup(props, { emit }) {
     const closeOrderForm = () => {
-      this.$emit('close')
+      emit('close')
     }
-
     return {
       closeOrderForm
     };

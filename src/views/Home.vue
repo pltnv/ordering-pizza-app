@@ -1,7 +1,7 @@
 <template >
   <div class="container">
     <ul class="items-list">
-      <li v-for="(item, id) in this.$store.state.items" :key="id" class="items-list__item">
+      <li v-for="(item, id) in menuStore.items" :key="id" class="items-list__item">
         <a @click="openOrderForm(item)">
           <ItemCard class="item-list__card"
               :name="item.name"
@@ -12,7 +12,7 @@
         </a>
           <OrderForm
             v-if="isOrderFormVisible"
-            @close="isOrderFormVisible = false"
+            @close="closeOrderForm"
             class="order-modal"
             :currentOrder="currentOrder"
           ></OrderForm>
@@ -26,6 +26,8 @@
 import ItemCard from "@/components/ItemCard";
 import OrderForm from "@/components/OrderForm";
 import { ref, watch, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useMenuStore} from "../stores/menu";
 
 export default {
   name: 'Home',
@@ -33,28 +35,25 @@ export default {
     ItemCard, OrderForm
   },
   setup(props, ctx) {
+    const router = useRouter()
+    const route = useRoute()
+    const menuStore = useMenuStore()
+
     let isOrderFormVisible = ref(false)
     let currentOrder = ref('')
 
     const openOrderForm = (item) => {
-      this.$router.push({query: {id: item.id}})
+      router.push({query: {id: item.id}})
       isOrderFormVisible.value = true;
       currentOrder.value = item;
     }
 
     const closeOrderForm = () => {
-      this.isOrderFormVisible = false;
-      this.$router.push('/');
-    }
+      router.push('/');
+      isOrderFormVisible.value = false;
+      currentOrder.value = '';
 
-    onMounted(() => {
-      if (this.$route.query.id && this.$store.state.items[this.$route.query.id-1]) {
-        currentOrder.value = this.$store.state.items[this.$route.query.id-1]
-        isOrderFormVisible.value = true;
-      } else {
-        this.$router.push('/');
-      }
-    })
+    }
 
     watch(isOrderFormVisible, (visibleStatus) => {
       if (visibleStatus) {
@@ -65,7 +64,17 @@ export default {
       }
     });
 
+    onMounted(() => {
+      if (route.query.id && menuStore.items[route.query.id-1]) {
+        currentOrder.value = menuStore.items[route.query.id-1]
+        isOrderFormVisible.value = true;
+      } else {
+        router.push('/');
+      }
+    })
+
     return {
+      menuStore,
       isOrderFormVisible,
       currentOrder,
 
@@ -73,42 +82,6 @@ export default {
       closeOrderForm
     };
   },
-
-  // data() {
-  //   return {
-  //     isOrderFormVisible: false,
-  //     currentOrder: '',
-  //   }
-  // },
-  // methods: {
-  //   openOrderForm(item) {
-  //     this.$router.push({query: {id: item.id}})
-  //     this.isOrderFormVisible = true;
-  //     this.currentOrder = item;
-  //   },
-  //   closeOrderForm() {
-  //     this.isOrderFormVisible = false;
-  //     this.$router.push('/');
-  //   },
-  // },
-  // watch: {
-  //   isOrderFormVisible (visibleStatus) {
-  //     if (visibleStatus) {
-  //       document.documentElement.style.overflow = "hidden"
-  //     }
-  //     else {
-  //       document.documentElement.style.overflow = "auto"
-  //     }
-  //   },
-  // },
-  // mounted() {
-  //   if (this.$route.query.id && this.$store.state.items[this.$route.query.id-1]) {
-  //     this.currentOrder = this.$store.state.items[this.$route.query.id-1]
-  //     this.isOrderFormVisible = true;
-  //   } else {
-  //     this.$router.push('/');
-  //   }
-  // },
 }
 </script>
 
