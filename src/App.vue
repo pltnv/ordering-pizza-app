@@ -2,13 +2,28 @@
   <div class="nav">
     <router-link to="/">
       <div class="logo">
-        <img class="logo__icon" src="../src/images/logo.png" alt="Company icon">
-        <span class="logo__name">Pizza</span>
+        <img src="../src/images/logo.png" alt="Company icon" class="logo__icon" >
+        <span class="logo__name"> Pizza </span>
       </div>
     </router-link>
   </div>
   <router-view/>
 </template>
+
+<script>
+import BucketList from "@/components/BucketList";
+
+export default {
+  name: "App.vue",
+  components: {
+    BucketList
+  },
+  setup(props, { emit }) {
+    return {};
+  },
+}
+
+</script>
 
 <style>
 #app {
@@ -21,7 +36,7 @@ body{
 }
 
 .nav {
-  padding: 2.5rem;
+  padding: 2rem;
   text-decoration: none;
   display: flex;
   justify-content: flex-start;

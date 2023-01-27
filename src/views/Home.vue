@@ -1,15 +1,20 @@
 <template >
+  <div class="bucket">
+    <BucketList @makeOrder="isOrderFormVisible = true"/>
+  </div>
   <div class="container">
     <ul class="items-list">
       <li v-for="(item, id) in menuStore.items" :key="id" class="items-list__item">
-        <a @click="openOrderForm(item)">
-          <ItemCard class="item-list__card"
+        <a>
+          <ItemCard
+              class="item-list__card"
               :name="item.name"
               :price="item.price"
               :cover="item.url"
-          >
-          </ItemCard>
+              @addToCart="cartStore.addToCart(item)"
+          ></ItemCard>
         </a>
+
           <OrderForm
             v-if="isOrderFormVisible"
             @close="closeOrderForm"
@@ -23,21 +28,24 @@
 </template>
 
 <script>
-import ItemCard from "@/components/ItemCard";
-import OrderForm from "@/components/OrderForm";
 import { ref, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useMenuStore} from "../stores/menu";
+import { useMenuStore } from "../stores/menu";
+import { useCartStore } from "../stores/cart";
+import ItemCard from "@/components/ItemCard";
+import OrderForm from "@/components/OrderForm";
+import BucketList from "@/components/BucketList";
 
 export default {
   name: 'Home',
   components: {
-    ItemCard, OrderForm
+    ItemCard, OrderForm, BucketList
   },
   setup(props, ctx) {
     const router = useRouter()
     const route = useRoute()
     const menuStore = useMenuStore()
+    const cartStore = useCartStore()
 
     let isOrderFormVisible = ref(false)
     let currentOrder = ref('')
@@ -56,36 +64,36 @@ export default {
     }
 
     watch(isOrderFormVisible, (visibleStatus) => {
-      if (visibleStatus) {
-        document.documentElement.style.overflow = "hidden"
-      }
-      else {
-        document.documentElement.style.overflow = "auto"
-      }
+      visibleStatus ? document.documentElement.style.overflow = "hidden" : document.documentElement.style.overflow = "auto"
     });
 
     onMounted(() => {
       if (route.query.id && menuStore.items[route.query.id-1]) {
         currentOrder.value = menuStore.items[route.query.id-1]
         isOrderFormVisible.value = true;
-      } else {
-        router.push('/');
       }
+      router.push('/');
     })
 
     return {
       menuStore,
+      cartStore,
       isOrderFormVisible,
       currentOrder,
 
       openOrderForm,
-      closeOrderForm
+      closeOrderForm,
+
     };
   },
 }
 </script>
 
 <style scoped>
+.bucket {
+  display: flex;
+  justify-content: flex-end;
+}
 
 .items-list{
   display: flex;
@@ -152,14 +160,16 @@ export default {
 }
 
   @media (max-width: 304px) {
-    .order-modal{
+    .order-modal {
       width: 90%;
     }
-    .items-list{
+
+    .items-list {
       padding: 1px;
       width: 100%;
     }
-    .items-list__item{
+
+    .items-list__item {
       margin: 0.5rem;
       list-style-type:none;
       width: 100%;
