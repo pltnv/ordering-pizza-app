@@ -7,19 +7,20 @@
       <li v-for="(item, id) in menuStore.items" :key="id" class="items-list__item">
         <a>
           <ItemCard
-              class="item-list__card"
               :name="item.name"
               :price="item.price"
               :cover="item.url"
+              class="item-list__card"
               @addToCart="cartStore.addToCart(item)"
           ></ItemCard>
         </a>
 
           <OrderForm
-            v-if="isOrderFormVisible"
-            @close="closeOrderForm"
-            class="order-modal"
+            v-model="isOrderFormVisible"
             :currentOrder="currentOrder"
+            class="order-modal"
+            @cancel="closeOrderForm"
+            @accept="makeOrder"
           ></OrderForm>
       </li>
     </ul>
@@ -60,7 +61,11 @@ export default {
       router.push('/');
       isOrderFormVisible.value = false;
       currentOrder.value = '';
+    }
 
+    const makeOrder = () => {
+      isOrderFormVisible.value = false;
+      cartStore.deleteAll();
     }
 
     watch(isOrderFormVisible, (visibleStatus) => {
@@ -82,8 +87,8 @@ export default {
       currentOrder,
 
       openOrderForm,
+      makeOrder,
       closeOrderForm,
-
     };
   },
 }

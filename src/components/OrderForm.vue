@@ -1,5 +1,9 @@
 <template>
-  <div class="form">
+  <div v-if="modelValue" class="form">
+    <button @click="close" class="button-close">
+      <i class="mdi mdi-close"></i>
+    </button>
+
     <span class="form__title"> Make an order</span>
     <div class="form__position">
       <span> {{ currentOrder.name }}  </span>
@@ -10,26 +14,25 @@
     <div class="form__address">
       <span> Address </span>
       <div class="inp">
-        <input v-model="deliveryData.street" class="form__address-input" type="text"  placeholder="Street" :required="!isValidForm">
-        <input v-model="deliveryData.house" class="form__address-input" type="text"  placeholder="House" :required="!isValidForm">
-        <input v-model="deliveryData.floor" class="form__address-input" type="text"  placeholder="Floor" :required="!isValidForm">
-        <input v-model="deliveryData.entrance" class="form__address-input" type="text"  placeholder="Entrance" :required="!isValidForm">
-        <input v-model="deliveryData.doorCode" class="form__address-input" type="text"  placeholder="Door code">
-        <input v-model="deliveryData.email" class="form__address-input email" type="text"  placeholder="E-mail" :required="!isValidForm">
+        <input v-model="deliveryData.street" class="form__address-input" placeholder="Street" :required="!isValidForm">
+        <input v-model="deliveryData.house" class="form__address-input" placeholder="House" :required="!isValidForm">
+        <input v-model="deliveryData.floor" class="form__address-input" placeholder="Floor" :required="!isValidForm">
+        <input v-model="deliveryData.entrance" class="form__address-input" placeholder="Entrance" :required="!isValidForm">
+        <input v-model="deliveryData.doorCode" class="form__address-input" placeholder="Door code">
+        <input v-model="deliveryData.email" type="email" class="form__address-input email" placeholder="E-mail" :required="!isValidForm">
       </div>
     </div>
 
     <div class="form__buttons">
-      <button class="form__button form__button-back" @click="closeOrderForm"> Назад </button>
+      <button class="form__button form__button-back" @click="cancel"> Назад </button>
       <button
           class="form__button form__button-order"
           :disabled="!isValidForm"
-          @click="closeOrderForm"
+          @click="accept"
       >
         Заказать
       </button>
     </div>
-
   </div>
 </template>
 
@@ -40,7 +43,11 @@ import { useCartStore } from "../stores/cart";
 export default {
   name: "OrderForm.vue",
   props: {
-    currentOrder: Object
+    currentOrder: Object,
+    modelValue: {
+      type: Boolean,
+      required: false
+    }
   },
   setup(props, { emit }) {
     const cartStore = useCartStore()
@@ -64,9 +71,16 @@ export default {
       );
     });
 
-    const closeOrderForm = () => {
-      cartStore.deleteAll()
-      emit('close')
+    const close = () => {
+      emit('update:modelValue', false)
+    }
+
+    const cancel= () => {
+      emit('cancel')
+    }
+
+    const accept= () => {
+      emit('accept')
     }
 
     return {
@@ -74,7 +88,9 @@ export default {
       deliveryData,
       isValidForm,
 
-      closeOrderForm
+      close,
+      cancel,
+      accept,
     };
   },
 }
@@ -173,6 +189,28 @@ hr {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
+}
+
+.mdi {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 25px;
+}
+
+.mdi:hover{
+  color: #750624;
+  cursor: pointer;
+}
+
+.button-close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
 }
 
 @media screen and (max-width : 770px) {
